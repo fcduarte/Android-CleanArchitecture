@@ -1,12 +1,9 @@
 /**
  * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,47 +25,47 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class FileManagerTest extends ApplicationTestCase {
 
-  private FileManager fileManager;
-  private File cacheDir;
+    private FileManager fileManager;
+    private File cacheDir;
 
-  @Before
-  public void setUp() {
-    fileManager = new FileManager();
-    cacheDir = RuntimeEnvironment.application.getCacheDir();
-  }
-
-  @After
-  public void tearDown() {
-    if (cacheDir != null) {
-      fileManager.clearDirectory(cacheDir);
+    @Before
+    public void setUp() {
+        fileManager = new FileManager();
+        cacheDir = RuntimeEnvironment.application.getCacheDir();
     }
-  }
 
-  @Test
-  public void testWriteToFile() {
-    File fileToWrite = createDummyFile();
-    String fileContent = "content";
+    @After
+    public void tearDown() {
+        if (cacheDir != null) {
+            fileManager.clearDirectory(cacheDir);
+        }
+    }
 
-    fileManager.writeToFile(fileToWrite, fileContent);
+    @Test
+    public void testWriteToFile() {
+        File fileToWrite = createDummyFile();
+        String fileContent = "content";
 
-    assertThat(fileToWrite.exists(), is(true));
-  }
+        fileManager.writeToFile(fileToWrite, fileContent);
 
-  @Test
-  public void testFileContent() {
-    File fileToWrite = createDummyFile();
-    String fileContent = "content\n";
+        assertThat(fileToWrite.exists(), is(true));
+    }
 
-    fileManager.writeToFile(fileToWrite, fileContent);
-    String expectedContent = fileManager.readFileContent(fileToWrite);
+    @Test
+    public void testFileContent() {
+        File fileToWrite = createDummyFile();
+        String fileContent = "content\n";
 
-    assertThat(expectedContent, is(equalTo(fileContent)));
-  }
+        fileManager.writeToFile(fileToWrite, fileContent);
+        String expectedContent = fileManager.readFileContent(fileToWrite);
 
-  private File createDummyFile() {
-    String dummyFilePath = cacheDir.getPath() + File.separator + "dumyFile";
-    File dummyFile = new File(dummyFilePath);
+        assertThat(expectedContent, is(equalTo(fileContent)));
+    }
 
-    return dummyFile;
-  }
+    private File createDummyFile() {
+        String dummyFilePath = cacheDir.getPath() + File.separator + "dumyFile";
+        File dummyFile = new File(dummyFilePath);
+
+        return dummyFile;
+    }
 }

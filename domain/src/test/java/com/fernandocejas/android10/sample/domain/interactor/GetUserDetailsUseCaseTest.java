@@ -1,12 +1,9 @@
 /**
  * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,28 +26,27 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GetUserDetailsUseCaseTest {
 
-  private static final int FAKE_USER_ID = 123;
+    private static final int FAKE_USER_ID = 123;
 
-  private GetUserDetailsUseCase getUserDetailsUseCase;
+    private GetUserDetailsUseCase getUserDetailsUseCase;
 
-  @Mock private UserRepository mockUserRepository;
-  @Mock private ThreadExecutor mockThreadExecutor;
-  @Mock private PostExecutionThread mockPostExecutionThread;
+    @Mock private UserRepository mockUserRepository;
+    @Mock private ThreadExecutor mockThreadExecutor;
+    @Mock private PostExecutionThread mockPostExecutionThread;
 
-  @Before
-  public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    getUserDetailsUseCase = new GetUserDetailsUseCase(FAKE_USER_ID, mockUserRepository,
-        mockThreadExecutor, mockPostExecutionThread);
-  }
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        getUserDetailsUseCase = new GetUserDetailsUseCase(FAKE_USER_ID, mockUserRepository, mockThreadExecutor, mockPostExecutionThread);
+    }
 
-  @Test
-  public void testGetUserDetailsUseCaseObservableHappyCase() {
-    getUserDetailsUseCase.buildUseCaseObservable();
+    @Test
+    public void testGetUserDetailsUseCaseObservableHappyCase() {
+        getUserDetailsUseCase.buildUseCaseObservable();
 
-    verify(mockUserRepository).getUser(FAKE_USER_ID);
-    verifyNoMoreInteractions(mockUserRepository);
-    verifyZeroInteractions(mockPostExecutionThread);
-    verifyZeroInteractions(mockThreadExecutor);
-  }
+        verify(mockUserRepository).getUser(FAKE_USER_ID);
+        verifyNoMoreInteractions(mockUserRepository);
+        verifyZeroInteractions(mockPostExecutionThread);
+        verifyZeroInteractions(mockThreadExecutor);
+    }
 }

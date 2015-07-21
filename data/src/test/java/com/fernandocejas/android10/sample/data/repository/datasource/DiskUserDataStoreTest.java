@@ -1,12 +1,9 @@
 /**
  * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,29 +25,29 @@ import static org.mockito.Mockito.verify;
 
 public class DiskUserDataStoreTest extends ApplicationTestCase {
 
-  private static final int FAKE_USER_ID = 11;
+    private static final int FAKE_USER_ID = 11;
 
-  private DiskUserDataStore diskUserDataStore;
+    private DiskUserDataStore diskUserDataStore;
 
-  @Mock private UserCache mockUserCache;
+    @Mock private UserCache mockUserCache;
 
-  @Rule public ExpectedException expectedException = ExpectedException.none();
+    @Rule public ExpectedException expectedException = ExpectedException.none();
 
-  @Before
-  public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    diskUserDataStore = new DiskUserDataStore(mockUserCache);
-  }
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        diskUserDataStore = new DiskUserDataStore(mockUserCache);
+    }
 
-  @Test
-  public void testGetUserEntityListUnsupported() {
-    expectedException.expect(UnsupportedOperationException.class);
-    diskUserDataStore.getUserEntityList();
-  }
+    @Test
+    public void testGetUserEntityListUnsupported() {
+        expectedException.expect(UnsupportedOperationException.class);
+        diskUserDataStore.getUserEntityList();
+    }
 
-  @Test
-  public void testGetUserEntityDetailesFromCache() {
-    diskUserDataStore.getUserEntityDetails(FAKE_USER_ID);
-    verify(mockUserCache).get(FAKE_USER_ID);
-  }
+    @Test
+    public void testGetUserEntityDetailesFromCache() {
+        diskUserDataStore.getUserEntityDetails(FAKE_USER_ID);
+        verify(mockUserCache).get(FAKE_USER_ID);
+    }
 }

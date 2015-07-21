@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2014 android10.org. All rights reserved.
+ *
  * @author Fernando Cejas (the android10 coder)
  */
 package com.fernandocejas.android10.sample.presentation.view.adapter;
@@ -22,71 +23,75 @@ import java.util.List;
  */
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHolder> {
 
-  public interface OnItemClickListener {
-    void onUserItemClicked(UserModel userModel);
-  }
+    public interface OnItemClickListener {
+        void onUserItemClicked(UserModel userModel);
+    }
 
-  private List<UserModel> usersCollection;
-  private final LayoutInflater layoutInflater;
+    private List<UserModel> usersCollection;
+    private final LayoutInflater layoutInflater;
 
-  private OnItemClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
 
-  public UsersAdapter(Context context, Collection<UserModel> usersCollection) {
-    this.validateUsersCollection(usersCollection);
-    this.layoutInflater =
-        (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    this.usersCollection = (List<UserModel>) usersCollection;
-  }
+    public UsersAdapter(Context context, Collection<UserModel> usersCollection) {
+        this.validateUsersCollection(usersCollection);
+        this.layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        this.usersCollection = (List<UserModel>) usersCollection;
+    }
 
-  @Override public int getItemCount() {
-    return (this.usersCollection != null) ? this.usersCollection.size() : 0;
-  }
+    @Override
+    public int getItemCount() {
+        return (this.usersCollection != null) ? this.usersCollection.size() : 0;
+    }
 
-  @Override public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-    View view = this.layoutInflater.inflate(R.layout.row_user, parent, false);
-    UserViewHolder userViewHolder = new UserViewHolder(view);
+    @Override
+    public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = this.layoutInflater.inflate(R.layout.row_user, parent, false);
+        UserViewHolder userViewHolder = new UserViewHolder(view);
 
-    return userViewHolder;
-  }
+        return userViewHolder;
+    }
 
-  @Override public void onBindViewHolder(UserViewHolder holder, final int position) {
-    final UserModel userModel = this.usersCollection.get(position);
-    holder.textViewTitle.setText(userModel.getFullName());
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-      @Override public void onClick(View v) {
-        if (UsersAdapter.this.onItemClickListener != null) {
-          UsersAdapter.this.onItemClickListener.onUserItemClicked(userModel);
+    @Override
+    public void onBindViewHolder(UserViewHolder holder, final int position) {
+        final UserModel userModel = this.usersCollection.get(position);
+        holder.textViewTitle.setText(userModel.getFullName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (UsersAdapter.this.onItemClickListener != null) {
+                    UsersAdapter.this.onItemClickListener.onUserItemClicked(userModel);
+                }
+            }
+        });
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    public void setUsersCollection(Collection<UserModel> usersCollection) {
+        this.validateUsersCollection(usersCollection);
+        this.usersCollection = (List<UserModel>) usersCollection;
+        this.notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    private void validateUsersCollection(Collection<UserModel> usersCollection) {
+        if (usersCollection == null) {
+            throw new IllegalArgumentException("The list cannot be null");
         }
-      }
-    });
-  }
-
-  @Override public long getItemId(int position) {
-    return position;
-  }
-
-  public void setUsersCollection(Collection<UserModel> usersCollection) {
-    this.validateUsersCollection(usersCollection);
-    this.usersCollection = (List<UserModel>) usersCollection;
-    this.notifyDataSetChanged();
-  }
-
-  public void setOnItemClickListener (OnItemClickListener onItemClickListener) {
-    this.onItemClickListener = onItemClickListener;
-  }
-
-  private void validateUsersCollection(Collection<UserModel> usersCollection) {
-    if (usersCollection == null) {
-      throw new IllegalArgumentException("The list cannot be null");
     }
-  }
 
-  static class UserViewHolder extends RecyclerView.ViewHolder {
-    @Bind(R.id.title) TextView textViewTitle;
+    static class UserViewHolder extends RecyclerView.ViewHolder {
+        @Bind(R.id.title) TextView textViewTitle;
 
-    public UserViewHolder(View itemView) {
-      super(itemView);
-      ButterKnife.bind(this, itemView);
+        public UserViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+        }
     }
-  }
 }
