@@ -13,8 +13,6 @@
 package com.fernandocejas.android10.sample.domain.interactor;
 
 import com.fernandocejas.android10.sample.domain.User;
-import com.fernandocejas.android10.sample.domain.executor.PostExecutionThread;
-import com.fernandocejas.android10.sample.domain.executor.ThreadExecutor;
 import com.fernandocejas.android10.sample.domain.repository.UserRepository;
 import javax.inject.Inject;
 import rx.Observable;
@@ -29,8 +27,8 @@ public class GetUserDetailsUseCase extends UseCase {
     private final UserRepository userRepository;
 
     @Inject
-    public GetUserDetailsUseCase(int userId, UserRepository userRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
-        super(threadExecutor, postExecutionThread);
+    public GetUserDetailsUseCase(int userId, UserRepository userRepository) {
+        super();
         this.userId = userId;
         this.userRepository = userRepository;
     }

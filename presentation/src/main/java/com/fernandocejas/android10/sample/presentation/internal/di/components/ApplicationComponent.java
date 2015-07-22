@@ -13,8 +13,6 @@
 package com.fernandocejas.android10.sample.presentation.internal.di.components;
 
 import android.content.Context;
-import com.fernandocejas.android10.sample.domain.executor.PostExecutionThread;
-import com.fernandocejas.android10.sample.domain.executor.ThreadExecutor;
 import com.fernandocejas.android10.sample.domain.repository.RouteRepository;
 import com.fernandocejas.android10.sample.domain.repository.UserRepository;
 import com.fernandocejas.android10.sample.presentation.internal.di.modules.ApplicationModule;
@@ -32,10 +30,6 @@ public interface ApplicationComponent {
 
     //Exposed to sub-graphs.
     Context context();
-
-    ThreadExecutor threadExecutor();
-
-    PostExecutionThread postExecutionThread();
 
     UserRepository userRepository();
 
