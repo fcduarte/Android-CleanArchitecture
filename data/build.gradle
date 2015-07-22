@@ -61,6 +61,7 @@ dependencies {
   compile dataDependencies.gson
   compile dataDependencies.rxJava
   compile dataDependencies.androidAnnotations
+  compile dataDependencies.retrofit
 
   testCompile testDependencies.junit
   testCompile testDependencies.assertj

@@ -1,8 +1,6 @@
 package com.fernandocejas.android10.sample.data.repository.datasource;
 
-import com.fernandocejas.android10.sample.data.entity.mapper.RouteEntityJsonMapper;
-import com.fernandocejas.android10.sample.data.net.RouteRestApi;
-import com.fernandocejas.android10.sample.data.net.RouteRestApiImpl;
+import com.fernandocejas.android10.sample.data.net.RouteRestService;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -18,10 +16,7 @@ public class RouteDataStoreFactory {
     }
 
     public RouteDataStore createCloudDataStore() {
-        // FIXME injection?
-        RouteEntityJsonMapper routeEntityJsonMapper = new RouteEntityJsonMapper();
-        RouteRestApi restApi = new RouteRestApiImpl(routeEntityJsonMapper);
-
+        RouteRestService restApi = new RouteRestService();
         return new CloudRouteDataStore(restApi);
     }
 

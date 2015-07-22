@@ -1,7 +1,7 @@
 package com.fernandocejas.android10.sample.data.repository.datasource;
 
 import com.fernandocejas.android10.sample.data.entity.RouteEntity;
-import com.fernandocejas.android10.sample.data.net.RouteRestApi;
+import com.fernandocejas.android10.sample.data.net.RouteRestService;
 import java.util.List;
 import rx.Observable;
 
@@ -10,14 +10,14 @@ import rx.Observable;
  */
 public class CloudRouteDataStore implements RouteDataStore {
 
-    private final RouteRestApi routeRestApi;
+    private final RouteRestService routeRestService;
 
-    public CloudRouteDataStore(RouteRestApi restApi) {
-        this.routeRestApi = restApi;
+    public CloudRouteDataStore(RouteRestService restApi) {
+        this.routeRestService = restApi;
     }
 
     @Override
     public Observable<List<RouteEntity>> getRouteEntityList() {
-        return routeRestApi.getRouteEntityList();
+        return routeRestService.getRouteEntityList();
     }
 }
