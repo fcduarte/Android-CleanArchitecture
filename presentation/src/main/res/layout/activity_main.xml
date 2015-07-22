@@ -31,4 +31,11 @@
         android:text="@string/btn_text_load_data"
         />
 
+    <Button
+        android:id="@+id/btn_load_routes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Load Routes"
+        />
+
 </LinearLayout>

@@ -13,6 +13,7 @@ import com.fernandocejas.android10.sample.presentation.R;
 public class MainActivity extends BaseActivity {
 
     @Bind(R.id.btn_LoadData) Button btn_LoadData;
+    @Bind(R.id.btn_load_routes) Button btnLoadRoutes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +28,10 @@ public class MainActivity extends BaseActivity {
     @OnClick(R.id.btn_LoadData)
     void navigateToUserList() {
         this.navigator.navigateToUserList(this);
+    }
+
+    @OnClick(R.id.btn_load_routes)
+    void navigateToRouteList() {
+        this.navigator.navigateToRouteList(this);
     }
 }

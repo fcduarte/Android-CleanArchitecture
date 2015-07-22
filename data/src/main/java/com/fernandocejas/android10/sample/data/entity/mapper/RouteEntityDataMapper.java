@@ -4,11 +4,19 @@ import com.fernandocejas.android10.sample.data.entity.RouteEntity;
 import com.fernandocejas.android10.sample.domain.Route;
 import java.util.ArrayList;
 import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Created by felipeduarte on 7/21/15.
  */
+@Singleton
 public class RouteEntityDataMapper {
+
+    @Inject
+    public RouteEntityDataMapper() {
+        // no-op
+    }
 
     public List<Route> transform(List<RouteEntity> routeEntities) {
         List<Route> routeList = new ArrayList<>();

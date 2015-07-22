@@ -15,8 +15,8 @@ public class RouteEntityJsonMapper {
         List<RouteEntity> routes = new ArrayList<>();
         RouteEntity routeEntity = new RouteEntity();
         routeEntity.setId(1);
-        routeEntity.setShortName("Test");
-        routeEntity.setLongName("Test Test");
+        routeEntity.setShortName("329");
+        routeEntity.setLongName("Northbound Baby Bullet");
         routeEntity.setLastModifiedDate(new Date());
 
         routes.add(routeEntity);

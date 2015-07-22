@@ -30,6 +30,12 @@
             android:name=".view.activity.UserDetailsActivity"
             android:label="@string/activity_title_user_details">
         </activity>
+
+        <activity
+            android:name=".view.activity.RouteListActivity"
+            android:label="@string/activity_title_route_list">
+        </activity>
+
     </application>
 
 </manifest>
