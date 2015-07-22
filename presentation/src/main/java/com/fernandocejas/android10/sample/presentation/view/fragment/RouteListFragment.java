@@ -1,5 +1,6 @@
 package com.fernandocejas.android10.sample.presentation.view.fragment;
 
+import android.app.MediaRouteButton;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,8 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.fernandocejas.android10.sample.presentation.R;
 import com.fernandocejas.android10.sample.presentation.internal.di.components.RouteComponent;
 import com.fernandocejas.android10.sample.presentation.model.RouteModel;
@@ -27,6 +31,10 @@ public class RouteListFragment extends BaseFragment implements RouteListView {
     @Inject RouteListPresenter routeListPresenter;
 
     @Bind(R.id.rv_routes) RecyclerView rvRoutes;
+    @Bind(R.id.rl_progress) RelativeLayout rlProgress;
+    @Bind(R.id.rl_retry) RelativeLayout rlRetry;
+    @Bind(R.id.bt_retry) Button btRetry;
+
     private RoutesAdapter routesAdapter;
 
     @Override
@@ -77,23 +85,26 @@ public class RouteListFragment extends BaseFragment implements RouteListView {
 
     @Override
     public void showLoading() {
-        // TODO
+        this.rlProgress.setVisibility(View.VISIBLE);
+        this.getActivity().setProgressBarIndeterminateVisibility(true);
     }
 
     @Override
     public void hideLoading() {
-        // TODO
+        this.rlProgress.setVisibility(View.GONE);
+        this.getActivity().setProgressBarIndeterminateVisibility(false);
     }
 
     @Override
     public void showRetry() {
-        // TODO
+        this.rlRetry.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRetry() {
-        // TODO
+        this.rlRetry.setVisibility(View.GONE);
     }
+
 
     @Override
     public void showError(String message) {
@@ -104,4 +115,10 @@ public class RouteListFragment extends BaseFragment implements RouteListView {
     public Context getContext() {
         return this.getActivity().getApplicationContext();
     }
+
+    @OnClick(R.id.bt_retry)
+    void onButtonRetryClick() {
+        RouteListFragment.this.loadRouteList();
+    }
+
 }
