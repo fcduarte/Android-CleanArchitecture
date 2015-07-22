@@ -12,20 +12,26 @@ import com.fernandocejas.android10.sample.presentation.R;
  */
 public class MainActivity extends BaseActivity {
 
-  @Bind(R.id.btn_LoadData) Button btn_LoadData;
+    @Bind(R.id.btn_LoadData) Button btn_LoadData;
+    @Bind(R.id.btn_load_routes) Button btnLoadRoutes;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    ButterKnife.bind(this);
-  }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+    }
 
-  /**
-   * Goes to the user list screen.
-   */
-  @OnClick(R.id.btn_LoadData)
-  void navigateToUserList() {
-    this.navigator.navigateToUserList(this);
-  }
+    /**
+     * Goes to the user list screen.
+     */
+    @OnClick(R.id.btn_LoadData)
+    void navigateToUserList() {
+        this.navigator.navigateToUserList(this);
+    }
+
+    @OnClick(R.id.btn_load_routes)
+    void navigateToRouteList() {
+        this.navigator.navigateToRouteList(this);
+    }
 }

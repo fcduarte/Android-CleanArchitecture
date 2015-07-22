@@ -44,8 +44,8 @@ android {
     quiet true
     abortOnError false
     ignoreWarnings true
-    disable 'InvalidPackage'  // Some libraries have issues with this
-    disable 'OldTargetApi'    // Due to Robolectric that modifies the manifest when running tests
+    disable 'InvalidPackage' // Some libraries have issues with this
+    disable 'OldTargetApi' // Due to Robolectric that modifies the manifest when running tests
   }
 }
 
@@ -62,6 +62,7 @@ dependencies {
   compile dataDependencies.rxJava
   compile dataDependencies.rxAndroid
   compile dataDependencies.androidAnnotations
+  compile dataDependencies.retrofit
 
   testCompile testDependencies.junit
   testCompile testDependencies.assertj

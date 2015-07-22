@@ -1,12 +1,9 @@
 /**
  * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -32,53 +29,53 @@ import static org.mockito.BDDMockito.given;
 
 public class UseCaseTest {
 
-  private UseCaseTestClass useCase;
+    private UseCaseTestClass useCase;
 
-  @Mock private ThreadExecutor mockThreadExecutor;
-  @Mock private PostExecutionThread mockPostExecutionThread;
+    @Mock private ThreadExecutor mockThreadExecutor;
+    @Mock private PostExecutionThread mockPostExecutionThread;
 
-  @Before
-  public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    this.useCase = new UseCaseTestClass(mockThreadExecutor, mockPostExecutionThread);
-  }
-
-  @Test
-  @SuppressWarnings("unchecked")
-  public void testBuildUseCaseObservableReturnCorrectResult() {
-    TestSubscriber<Integer> testSubscriber = new TestSubscriber<>();
-    TestScheduler testScheduler = new TestScheduler();
-    given(mockPostExecutionThread.getScheduler()).willReturn(testScheduler);
-
-    useCase.execute(testSubscriber);
-
-    assertThat(testSubscriber.getOnNextEvents().size(), is(0));
-  }
-
-  @Test
-  public void testSubscriptionWhenExecutingUseCase() {
-    TestSubscriber<Integer> testSubscriber = new TestSubscriber<>();
-
-    useCase.execute(testSubscriber);
-    useCase.unsubscribe();
-
-    assertThat(testSubscriber.isUnsubscribed(), is(true));
-  }
-
-  private static class UseCaseTestClass extends UseCase {
-
-    protected UseCaseTestClass(
-        ThreadExecutor threadExecutor,
-        PostExecutionThread postExecutionThread) {
-      super(threadExecutor, postExecutionThread);
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        this.useCase = new UseCaseTestClass(mockThreadExecutor, mockPostExecutionThread);
     }
 
-    @Override protected Observable buildUseCaseObservable() {
-      return Observable.empty();
+    @Test
+    @SuppressWarnings("unchecked")
+    public void testBuildUseCaseObservableReturnCorrectResult() {
+        TestSubscriber<Integer> testSubscriber = new TestSubscriber<>();
+        TestScheduler testScheduler = new TestScheduler();
+        given(mockPostExecutionThread.getScheduler()).willReturn(testScheduler);
+
+        useCase.execute(testSubscriber);
+
+        assertThat(testSubscriber.getOnNextEvents().size(), is(0));
     }
 
-    @Override public void execute(Subscriber UseCaseSubscriber) {
-      super.execute(UseCaseSubscriber);
+    @Test
+    public void testSubscriptionWhenExecutingUseCase() {
+        TestSubscriber<Integer> testSubscriber = new TestSubscriber<>();
+
+        useCase.execute(testSubscriber);
+        useCase.unsubscribe();
+
+        assertThat(testSubscriber.isUnsubscribed(), is(true));
     }
-  }
+
+    private static class UseCaseTestClass extends UseCase {
+
+        protected UseCaseTestClass(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+            super(threadExecutor, postExecutionThread);
+        }
+
+        @Override
+        protected Observable buildUseCaseObservable() {
+            return Observable.empty();
+        }
+
+        @Override
+        public void execute(Subscriber UseCaseSubscriber) {
+            super.execute(UseCaseSubscriber);
+        }
+    }
 }

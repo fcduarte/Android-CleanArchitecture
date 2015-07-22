@@ -1,12 +1,9 @@
 /**
  * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,49 +25,50 @@ import javax.inject.Inject;
  */
 public class UserEntityJsonMapper {
 
-  private final Gson gson;
+    private final Gson gson;
 
-  @Inject
-  public UserEntityJsonMapper() {
-    this.gson = new Gson();
-  }
-
-  /**
-   * Transform from valid json string to {@link UserEntity}.
-   *
-   * @param userJsonResponse A json representing a user profile.
-   * @return {@link UserEntity}.
-   * @throws com.google.gson.JsonSyntaxException if the json string is not a valid json structure.
-   */
-  public UserEntity transformUserEntity(String userJsonResponse) throws JsonSyntaxException {
-    try {
-      Type userEntityType = new TypeToken<UserEntity>() {}.getType();
-      UserEntity userEntity = this.gson.fromJson(userJsonResponse, userEntityType);
-
-      return userEntity;
-    } catch (JsonSyntaxException jsonException) {
-      throw jsonException;
+    @Inject
+    public UserEntityJsonMapper() {
+        this.gson = new Gson();
     }
-  }
 
-  /**
-   * Transform from valid json string to List of {@link UserEntity}.
-   *
-   * @param userListJsonResponse A json representing a collection of users.
-   * @return List of {@link UserEntity}.
-   * @throws com.google.gson.JsonSyntaxException if the json string is not a valid json structure.
-   */
-  public List<UserEntity> transformUserEntityCollection(String userListJsonResponse)
-      throws JsonSyntaxException {
+    /**
+     * Transform from valid json string to {@link UserEntity}.
+     *
+     * @param userJsonResponse A json representing a user profile.
+     * @return {@link UserEntity}.
+     * @throws com.google.gson.JsonSyntaxException if the json string is not a valid json structure.
+     */
+    public UserEntity transformUserEntity(String userJsonResponse) throws JsonSyntaxException {
+        try {
+            Type userEntityType = new TypeToken<UserEntity>() {
+            }.getType();
+            UserEntity userEntity = this.gson.fromJson(userJsonResponse, userEntityType);
 
-    List<UserEntity> userEntityCollection;
-    try {
-      Type listOfUserEntityType = new TypeToken<List<UserEntity>>() {}.getType();
-      userEntityCollection = this.gson.fromJson(userListJsonResponse, listOfUserEntityType);
-
-      return userEntityCollection;
-    } catch (JsonSyntaxException jsonException) {
-      throw jsonException;
+            return userEntity;
+        } catch (JsonSyntaxException jsonException) {
+            throw jsonException;
+        }
     }
-  }
+
+    /**
+     * Transform from valid json string to List of {@link UserEntity}.
+     *
+     * @param userListJsonResponse A json representing a collection of users.
+     * @return List of {@link UserEntity}.
+     * @throws com.google.gson.JsonSyntaxException if the json string is not a valid json structure.
+     */
+    public List<UserEntity> transformUserEntityCollection(String userListJsonResponse) throws JsonSyntaxException {
+
+        List<UserEntity> userEntityCollection;
+        try {
+            Type listOfUserEntityType = new TypeToken<List<UserEntity>>() {
+            }.getType();
+            userEntityCollection = this.gson.fromJson(userListJsonResponse, listOfUserEntityType);
+
+            return userEntityCollection;
+        } catch (JsonSyntaxException jsonException) {
+            throw jsonException;
+        }
+    }
 }

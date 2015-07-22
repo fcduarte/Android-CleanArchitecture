@@ -1,5 +1,6 @@
 /**
  * Copyright (C) 2014 android10.org. All rights reserved.
+ *
  * @author Fernando Cejas (the android10 coder)
  */
 package com.fernandocejas.android10.sample.presentation.view.activity;
@@ -18,35 +19,34 @@ import com.fernandocejas.android10.sample.presentation.view.fragment.UserListFra
 /**
  * Activity that shows a list of Users.
  */
-public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>,
-    UserListFragment.UserListListener {
+public class UserListActivity extends BaseActivity implements HasComponent<UserComponent>, UserListFragment.UserListListener {
 
-  public static Intent getCallingIntent(Context context) {
-    return new Intent(context, UserListActivity.class);
-  }
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, UserListActivity.class);
+    }
 
-  private UserComponent userComponent;
+    private UserComponent userComponent;
 
-  @Override protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-    setContentView(R.layout.activity_user_list);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setContentView(R.layout.activity_user_list);
 
-    this.initializeInjector();
-  }
+        this.initializeInjector();
+    }
 
-  private void initializeInjector() {
-    this.userComponent = DaggerUserComponent.builder()
-        .applicationComponent(getApplicationComponent())
-        .activityModule(getActivityModule())
-        .build();
-  }
+    private void initializeInjector() {
+        this.userComponent = DaggerUserComponent.builder().applicationComponent(getApplicationComponent()).activityModule(getActivityModule()).build();
+    }
 
-  @Override public UserComponent getComponent() {
-    return userComponent;
-  }
+    @Override
+    public UserComponent getComponent() {
+        return userComponent;
+    }
 
-  @Override public void onUserClicked(UserModel userModel) {
-    this.navigator.navigateToUserDetails(this, userModel.getUserId());
-  }
+    @Override
+    public void onUserClicked(UserModel userModel) {
+        this.navigator.navigateToUserDetails(this, userModel.getUserId());
+    }
 }

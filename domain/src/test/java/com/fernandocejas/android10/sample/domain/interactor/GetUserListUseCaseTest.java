@@ -1,12 +1,9 @@
 /**
  * Copyright (C) 2015 Fernando Cejas Open Source Project
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * http://www.apache.org/licenses/LICENSE-2.0
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -29,26 +26,25 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GetUserListUseCaseTest {
 
-  private GetUserListUseCase getUserListUseCase;
+    private GetUserListUseCase getUserListUseCase;
 
-  @Mock private ThreadExecutor mockThreadExecutor;
-  @Mock private PostExecutionThread mockPostExecutionThread;
-  @Mock private UserRepository mockUserRepository;
+    @Mock private ThreadExecutor mockThreadExecutor;
+    @Mock private PostExecutionThread mockPostExecutionThread;
+    @Mock private UserRepository mockUserRepository;
 
-  @Before
-  public void setUp() {
-    MockitoAnnotations.initMocks(this);
-    getUserListUseCase = new GetUserListUseCase(mockUserRepository, mockThreadExecutor,
-        mockPostExecutionThread);
-  }
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+        getUserListUseCase = new GetUserListUseCase(mockUserRepository, mockThreadExecutor, mockPostExecutionThread);
+    }
 
-  @Test
-  public void testGetUserListUseCaseObservableHappyCase() {
-    getUserListUseCase.buildUseCaseObservable();
+    @Test
+    public void testGetUserListUseCaseObservableHappyCase() {
+        getUserListUseCase.buildUseCaseObservable();
 
-    verify(mockUserRepository).getUsers();
-    verifyNoMoreInteractions(mockUserRepository);
-    verifyZeroInteractions(mockThreadExecutor);
-    verifyZeroInteractions(mockPostExecutionThread);
-  }
+        verify(mockUserRepository).getUsers();
+        verifyNoMoreInteractions(mockUserRepository);
+        verifyZeroInteractions(mockThreadExecutor);
+        verifyZeroInteractions(mockPostExecutionThread);
+    }
 }
