@@ -16,6 +16,7 @@ import android.content.Context;
 import com.fernandocejas.android10.sample.data.cache.serializer.JsonSerializer;
 import com.fernandocejas.android10.sample.data.entity.UserEntity;
 import com.fernandocejas.android10.sample.data.exception.UserNotFoundException;
+import com.fernandocejas.android10.sample.domain.executor.ThreadExecutor;
 import java.io.File;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -38,6 +39,7 @@ public class UserCacheImpl implements UserCache {
     private final File cacheDir;
     private final JsonSerializer serializer;
     private final FileManager fileManager;
+    private final ThreadExecutor threadExecutor;
 
     /**
      * Constructor of the class {@link UserCacheImpl}.
@@ -47,14 +49,15 @@ public class UserCacheImpl implements UserCache {
      * @param fileManager {@link FileManager} for saving serialized objects to the file system.
      */
     @Inject
-    public UserCacheImpl(Context context, JsonSerializer userCacheSerializer, FileManager fileManager) {
-        if (context == null || userCacheSerializer == null || fileManager == null) {
+    public UserCacheImpl(Context context, JsonSerializer userCacheSerializer, FileManager fileManager, ThreadExecutor executor) {
+        if (context == null || userCacheSerializer == null || fileManager == null || executor == null) {
             throw new IllegalArgumentException("Invalid null parameter");
         }
         this.context = context.getApplicationContext();
         this.cacheDir = this.context.getCacheDir();
         this.serializer = userCacheSerializer;
         this.fileManager = fileManager;
+        this.threadExecutor = executor;
     }
 
     @Override
@@ -150,7 +153,7 @@ public class UserCacheImpl implements UserCache {
      * @param runnable {@link Runnable} to execute
      */
     private void executeAsynchronously(Runnable runnable) {
-//        this.threadExecutor.execute(runnable);
+        this.threadExecutor.execute(runnable);
     }
 
     /**

@@ -12,6 +12,8 @@
  */
 package com.fernandocejas.android10.sample.presentation.internal.di.modules;
 
+import com.fernandocejas.android10.sample.domain.executor.PostExecutionThread;
+import com.fernandocejas.android10.sample.domain.executor.ThreadExecutor;
 import com.fernandocejas.android10.sample.domain.interactor.GetUserDetailsUseCase;
 import com.fernandocejas.android10.sample.domain.interactor.GetUserListUseCase;
 import com.fernandocejas.android10.sample.domain.interactor.UseCase;
@@ -46,7 +48,7 @@ public class UserModule {
     @Provides
     @PerActivity
     @Named("userDetails")
-    UseCase provideGetUserDetailsUseCase(UserRepository userRepository) {
-        return new GetUserDetailsUseCase(userId, userRepository);
+    UseCase provideGetUserDetailsUseCase(UserRepository userRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+        return new GetUserDetailsUseCase(userId, userRepository, threadExecutor, postExecutionThread);
     }
 }
